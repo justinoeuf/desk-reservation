@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roommate Rewards® - Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #fbbf24;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured::before {
+            content: "MOST POWERFUL";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fbbf24;
+            color: #000;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .plan-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .plan-price {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .plan-price span {
+            font-size: 16px;
+            color: #666;
+            font-weight: normal;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .plan-features li {
+            padding: 12px 0;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+            line-height: 1.6;
+        }
+        
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .plan-features li::before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .select-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .select-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .featured .select-btn {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #000;
+        }
+        
+        .testimonial {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .testimonial-text {
+            font-size: 18px;
+            color: #333;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 16px;
+        }
+        
+        .contact-info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-info p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .contact-info a {
+            color: #fbbf24;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .back-link a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        
+        .back-link a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Roommate Rewards®</h1>
+            <p>Choose the perfect plan for your desk reservation needs</p>
+        </div>
+        
+        <div class="pricing-container">
+            <div class="pricing-card">
+                <div class="plan-name">Basic</div>
+                <div class="plan-price">FREE</div>
+                <ul class="plan-features">
+                    <li>Preferential access to desk during off-peak hours (3AM-8AM)</li>
+                    <li>View reservation calendar</li>
+                    <li>Basic member support</li>
+                </ul>
+                <button class="select-btn">Get Started</button>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="plan-name">Standard</div>
+                <div class="plan-price">$9.99<span>/month</span></div>
+                <ul class="plan-features">
+                    <li>All Basic features</li>
+                    <li>Reserve any time slot of the day</li>
+                    <li>Advanced booking up to 7 days</li>
+                    <li>Priority email support</li>
+                </ul>
+                <button class="select-btn">Subscribe Now</button>
+            </div>
+            
+            <div class="pricing-card featured">
+                <div class="plan-name">Premium</div>
+                <div class="plan-price">$1,000,000<span>/month</span></div>
+                <ul class="plan-features">
+                    <li>All Standard features</li>
+                    <li>Unlimited reservations</li>
+                    <li>Can revoke or supersede Basic and Standard-tier reservations without cause or prior notice</li>
+                    <li>Dedicated concierge service</li>
+                    <li>Complimentary desk chair cushion upgrade</li>
+                </ul>
+                <button class="select-btn">Go Premium</button>
+            </div>
+        </div>
+        
+        <div class="testimonial">
+            <div class="testimonial-text">
+                "Since upgrading to Premium, my productivity has skyrocketed. The ability to override any reservation gives me the flexibility I need to work on my schedule. Worth every penny. The desk chair cushion is also incredibly comfortable."
+            </div>
+            <div class="testimonial-author">— Justin, Premium subscriber</div>
+        </div>
+        
+        <div class="contact-info">
+            <p>
+                Want to learn more about pricing and all the Roommate Rewards® benefits?<br>
+                Email us at <a href="mailto:subscriptions@44quincy.com">subscriptions@44quincy.com</a>
+            </p>
+        </div>
+        
+        <div class="back-link">
+            <a href="index.html">← Back to Desk Reservation Portal</a>
+        </div>
+    </div>
+</body>
+</html>
