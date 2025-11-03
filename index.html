@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Desk Reservation System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .desk-status {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .available {
+            background: #10b981;
+        }
+        
+        .occupied {
+            background: #ef4444;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .reservations {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e5e7eb;
+        }
+        
+        .reservation-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .reservation-info {
+            flex-grow: 1;
+        }
+        
+        .reservation-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .reservation-time {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .cancel-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            width: auto;
+        }
+        
+        .cancel-btn:hover {
+            background: #dc2626;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+            font-style: italic;
+        }
+        
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖥️ 44 Quincy Desk Reservation Portal</h1>
+        <p class="subtitle">Reservations only available to Roommate Rewards® members.</p>
+        
+        <div class="desk-status">
+            <span class="status-indicator available"></span>
+            <strong>Status: <span id="status-text">Available</span></strong>
+        </div>
+        
+        <div class="success-message" id="success-message">
+            Reservation confirmed! 🎉
+        </div>
+        
+        <form id="reservation-form">
+            <div class="form-group">
+                <label for="name">Roommate Rewards® member ID</label>
+                <input type="text" id="name" placeholder="Enter your member ID" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="time-slot">Time Slot</label>
+                <select id="time-slot" required>
+                    <option value="">Select a time slot</option>
+                    <option value="Morning (8AM - 12PM)">Morning (8AM - 12PM)</option>
+                    <option value="Afternoon (12PM - 5PM)">Afternoon (12PM - 5PM)</option>
+                    <option value="Evening (5PM - 10PM)">Evening (5PM - 10PM)</option>
+                    <option value="Night Owl (10PM - 2AM)">Night Owl (10PM - 2AM)</option>
+                </select>
+            </div>
+            
+            <button type="submit">Reserve Desk</button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 15px; font-size: 13px; color: #666;">
+            Not a Roommate Rewards® member yet? <a href="signup.html" style="color: #667eea; text-decoration: none; font-weight: 500;">Sign up today.</a>
+        </p>
+        
+        <div class="reservations">
+            <h2 style="margin-bottom: 15px; color: #333; font-size: 20px;">Upcoming Reservations</h2>
+            <div id="reservations-list">
+                <div class="empty-state">No reservations yet</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let reservations = [];
+        
+        // Set minimum date to today
+        const dateInput = document.getElementById('date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+        dateInput.value = today;
+        
+        function updateReservationsList() {
+            const listEl = document.getElementById('reservations-list');
+            
+            if (reservations.length === 0) {
+                listEl.innerHTML = '<div class="empty-state">No reservations yet</div>';
+                updateStatus();
+                return;
+            }
+            
+            listEl.innerHTML = reservations.map((res, index) => `
+                <div class="reservation-item">
+                    <div class="reservation-info">
+                        <div class="reservation-name">${res.name}</div>
+                        <div class="reservation-time">${res.date} - ${res.timeSlot}</div>
+                    </div>
+                    <button class="cancel-btn" onclick="cancelReservation(${index})">Cancel</button>
+                </div>
+            `).join('');
+            
+            updateStatus();
+        }
+        
+        function updateStatus() {
+            const statusIndicator = document.querySelector('.status-indicator');
+            const statusText = document.getElementById('status-text');
+            
+            const now = new Date();
+            const currentDate = now.toISOString().split('T')[0];
+            const currentHour = now.getHours();
+            
+            let isOccupied = reservations.some(res => {
+                if (res.date !== currentDate) return false;
+                
+                const slot = res.timeSlot;
+                if (slot.includes('8AM - 12PM') && currentHour >= 8 && currentHour < 12) return true;
+                if (slot.includes('12PM - 5PM') && currentHour >= 12 && currentHour < 17) return true;
+                if (slot.includes('5PM - 10PM') && currentHour >= 17 && currentHour < 22) return true;
+                if (slot.includes('10PM - 2AM') && (currentHour >= 22 || currentHour < 2)) return true;
+                
+                return false;
+            });
+            
+            if (isOccupied) {
+                statusIndicator.className = 'status-indicator occupied';
+                statusText.textContent = 'Currently Occupied';
+            } else {
+                statusIndicator.className = 'status-indicator available';
+                statusText.textContent = 'Available';
+            }
+        }
+        
+        window.cancelReservation = function(index) {
+            if (confirm('Are you sure you want to cancel this reservation?')) {
+                reservations.splice(index, 1);
+                updateReservationsList();
+            }
+        };
+        
+        document.getElementById('reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const date = document.getElementById('date').value;
+            const timeSlot = document.getElementById('time-slot').value;
+            
+            reservations.push({ name, date, timeSlot });
+            reservations.sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            // Show success message
+            const successMsg = document.getElementById('success-message');
+            successMsg.style.display = 'block';
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+            
+            // Reset form
+            document.getElementById('name').value = '';
+            document.getElementById('time-slot').value = '';
+            
+            updateReservationsList();
+        });
+        
+        // Update status every minute
+        setInterval(updateStatus, 60000);
+        updateReservationsList();
+    </script>
+</body>
+</html>
